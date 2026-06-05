@@ -1,8 +1,5 @@
 public class HexUtils {
-    /*
-     * Chuyen mang byte thanh chuoi hex in hoa.
-     * Moi byte duoc bieu dien bang 2 ky tu hex.
-     */
+    // Chuyen mang byte thanh chuoi hex in hoa.
     public static String toHex(byte[] data) {
         StringBuilder hex = new StringBuilder(data.length * 2);
 
@@ -13,10 +10,7 @@ public class HexUtils {
         return hex.toString();
     }
 
-    /*
-     * Chuyen chuoi hex ve mang byte.
-     * Ham nay duoc dung khi giai ma ciphertext dang hex.
-     */
+    // Chuyen chuoi hex ve mang byte va bao loi neu hex khong hop le.
     public static byte[] fromHex(String hexText) {
         String normalizedHex = hexText.replaceAll("\\s+", "");
 
@@ -40,4 +34,3 @@ public class HexUtils {
         return data;
     }
 }
-    
