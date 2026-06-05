@@ -10,6 +10,7 @@ public class AesDecryption {
     private static final int SHA256_HEX_LENGTH = 64;
     private static final String INTEGRITY_ERROR_MESSAGE = "Du lieu da bi thay doi hoac khoa khong chinh xac!";
 
+    // Giai ma ciphertext hex va kiem tra payload truoc khi tra plaintext.
     public static String decrypt(String ciphertextHex, SecretKey secretKey) throws Exception {
         byte[] encryptedData = HexUtils.fromHex(ciphertextHex);
 
@@ -24,10 +25,12 @@ public class AesDecryption {
         try {
             decryptedData = cipher.doFinal(encryptedData);
         } catch (BadPaddingException | IllegalBlockSizeException e) {
+            // Sai khoa hoac ciphertext bi sua thuong lam padding khong hop le.
             throw new Exception(INTEGRITY_ERROR_MESSAGE);
         }
         String payload = new String(decryptedData, StandardCharsets.UTF_8);
 
+        // Payload hop le phai co dang AES:<SHA-256-hex>:<plaintext>.
         if (!payload.startsWith(PAYLOAD_PREFIX)) {
             throw new Exception(INTEGRITY_ERROR_MESSAGE);
         }
@@ -43,6 +46,7 @@ public class AesDecryption {
         String plainText = payload.substring(hashEnd + 1);
         String actualHash = IntegrityUtils.sha256(plainText);
 
+        // So sanh hash de phat hien plaintext sau giai ma da bi thay doi.
         if (!expectedHash.equals(actualHash)) {
             throw new Exception(INTEGRITY_ERROR_MESSAGE);
         }
