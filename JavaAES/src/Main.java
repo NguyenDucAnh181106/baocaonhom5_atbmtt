@@ -5,7 +5,7 @@ import java.util.Scanner;
 import javax.crypto.SecretKey;
 
 public class Main {
-    // Dung chung Scanner cho toan bo chuong trinh.
+    // Scanner dung chung de doc toan bo input tu terminal.
     private static final Scanner scanner = new Scanner(System.in, StandardCharsets.UTF_8);
     private static final int LINE_WIDTH = 72;
 
@@ -35,10 +35,8 @@ public class Main {
         scanner.close();
     }
 
-    /*
-     * Hien thi menu chuc nang cua chuong trinh.
-     */
     private static void showMenu() {
+        // In menu chinh voi khung ASCII de terminal Windows hien thi on dinh.
         System.out.println();
         printBorder();
         printCentered("AES-128 ENCRYPTION TOOL");
@@ -51,11 +49,8 @@ public class Main {
         System.out.print("Choose an option: ");
     }
 
-    /*
-     * Doc lua chon tu nguoi dung.
-     * Neu nhap khong phai so nguyen thi tra ve -1.
-     */
     private static int getChoice() {
+        // Neu nguoi dung nhap khong phai so, tra ve -1 de xu ly nhu lua chon sai.
         String input = scanner.nextLine().trim();
 
         try {
@@ -65,10 +60,8 @@ public class Main {
         }
     }
 
-    /*
-     * Chuc nang ma hoa AES.
-     */
     private static void encryptMenu() {
+        // Doc plaintext/key, ma hoa, in ket qua va hoi co luu file hay khong.
         System.out.println();
         printSection("ENCRYPT MODULE");
 
@@ -87,10 +80,8 @@ public class Main {
         }
     }
 
-    /*
-     * Chuc nang giai ma AES.
-     */
     private static void decryptMenu() {
+        // Doc ciphertext/key, giai ma, in ket qua va hoi co luu file hay khong.
         System.out.println();
         printSection("DECRYPT MODULE");
 
@@ -109,10 +100,8 @@ public class Main {
         }
     }
 
-    /*
-     * Doc input bat buoc co noi dung.
-     */
     private static String readRequiredLine(String prompt, String errorMessage) {
+        // Lap lai den khi nguoi dung nhap noi dung khong rong.
         while (true) {
             System.out.print("> " + prompt);
             String input = scanner.nextLine();
@@ -125,10 +114,8 @@ public class Main {
         }
     }
 
-    /*
-     * Doc va kiem tra key truoc khi ma hoa/giai ma.
-     */
     private static SecretKey readSecretKey() {
+        // Key AES-128 phai dung 16 byte, neu sai thi yeu cau nhap lai.
         while (true) {
             System.out.print("> Key (16 bytes): ");
             String keyText = scanner.nextLine();
@@ -141,10 +128,8 @@ public class Main {
         }
     }
 
-    /*
-     * Luu ket qua ra file neu nguoi dung muon.
-     */
     private static void saveResultIfRequested(String result) {
+        // Cho phep luu ciphertext/plaintext sau khi xu ly thanh cong.
         System.out.print("> Save result to file? (y/n): ");
         String answer = scanner.nextLine().trim();
 
@@ -177,6 +162,7 @@ public class Main {
     }
 
     private static void printResult(String title, String valueLabel, String value, String timeLabel, String timeValue) {
+        // Ket qua co the dai, nen in theo dong boc trong khung.
         System.out.println();
         printSection(title);
         printWrappedLine(valueLabel + ": " + value);
@@ -205,6 +191,7 @@ public class Main {
     }
 
     private static void printWrappedLine(String text) {
+        // Cat chuoi dai thanh nhieu dong de khong vuot qua do rong khung.
         int contentWidth = LINE_WIDTH - 4;
         int start = 0;
 
