@@ -10,18 +10,6 @@ public class AesDecryption {
     private static final int SHA256_HEX_LENGTH = 64;
     private static final String INTEGRITY_ERROR_MESSAGE = "Du lieu da bi thay doi hoac khoa khong chinh xac!";
 
-    /*
-     * Ham decrypt()
-     *
-     * Chuc nang:
-     * - Nhan ciphertext dang hex
-     * - Su dung khoa bi mat AES-128
-     * - Giai ma bang AES/ECB/PKCS5Padding
-     * - Tra ve plaintext ban dau
-     *
-     * Luu y:
-     * - Thuat toan, mode va padding phai trung voi luc ma hoa
-     */
     public static String decrypt(String ciphertextHex, SecretKey secretKey) throws Exception {
         byte[] encryptedData = HexUtils.fromHex(ciphertextHex);
 
