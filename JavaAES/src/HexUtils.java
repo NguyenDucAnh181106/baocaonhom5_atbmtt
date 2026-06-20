@@ -15,7 +15,7 @@ public class HexUtils {
         String normalizedHex = hexText.replaceAll("\\s+", "");
 
         if (normalizedHex.length() == 0 || normalizedHex.length() % 2 != 0) {
-            throw new IllegalArgumentException("Hex ciphertext must contain an even number of characters.");
+            throw new IllegalArgumentException("Bản mã hex phải có số lượng ký tự chẵn.");
         }
 
         byte[] data = new byte[normalizedHex.length() / 2];
@@ -25,7 +25,7 @@ public class HexUtils {
             int low = Character.digit(normalizedHex.charAt(i + 1), 16);
 
             if (high == -1 || low == -1) {
-                throw new IllegalArgumentException("Hex ciphertext contains invalid characters.");
+                throw new IllegalArgumentException("Bản mã hex chứa ký tự không hợp lệ.");
             }
 
             data[i / 2] = (byte) ((high << 4) + low);
